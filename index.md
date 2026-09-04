@@ -19,18 +19,13 @@ lets you buzz them in, and otherwise sits there running a locked-down
 vendor GUI on a Linux system nobody's supposed to touch. It has a
 1024×600 resistive-adjacent touchscreen, an ARM SoC, and — it turns out —
 just enough headroom to run **DOOM** and a **Minecraft** server, once you
-own the thing outright and get root.
+get root.
 
 This is the write-up of doing exactly that: chip-off flash extraction,
-turning the vendor's restricted debug console into a real shell, and then
-the actual engineering — finding where the framebuffer lives, teaching a
-resistive touch panel to be a D-pad, and squeezing a Java-protocol
-Minecraft server onto hardware that was never meant to run anything but
-Hikvision's own GUI.
-
-This sits alongside a broader security assessment of the same device,
-kept and handled separately from this page — what's here is the "look what
-root access gets you" side of the project, not the vulnerability research.
+turning the vendor's restricted debug console into a shell, and then
+finding where the framebuffer lives, to make a
+resistive touch panel behave like a D-pad, and squeezing a Java-protocol
+Minecraft server onto this hardware.
 
 <div class="stats">
   <div class="stat"><span class="num">Rockchip RV1108</span><span class="lbl">SoC, single Cortex-A7 @ 1 GHz</span></div>
@@ -56,25 +51,25 @@ Getting past that started at the flash chip, not the console.
 
 <img src="./img/flash-ic-chipoff.jpeg" width="100%" alt="Macronix MX25L25645GZ2I-08G SPI NOR flash IC on the DS-KH6320-WTE1 mainboard, before desoldering">
 
-*The device's entire persistent storage: one Macronix MX25L25645GZ2I-08G, 32 MB SPI NOR flash, sitting exposed on the board next to a dense grid of labelled test points.*
+*The device's entire persistent storage: one Macronix MX25L25645GZ2I-08G, 32 MB SPI NOR flash*
 
-**1. Chip-off.** The device's entire persistent storage is a single
-Macronix 32 MB SPI NOR flash IC, sitting exposed on the mainboard with no
-epoxy potting. Desoldered and read directly with a flash programmer, it
+**1. Chip-off.** The device's entire persistent storage is a single 
+Macronix 32 MB SPI NOR flash IC, sitting exposed on the back of the mainboard. 
+Using hot-air, it was desoldered and read directly with a flash programmer, and it
 gives a complete, bit-for-bit image of everything the device boots from —
-bootloader, kernel, root filesystem, application binaries, the works.
+bootloader, kernel, root filesystem, application binaries.
 That image is what makes everything downstream possible: it can be
 studied, patched, and reflashed offline, with zero risk to a running unit
 until a rewritten image is actually written back.
 
 **2. Finding the actual boot path.** The root filesystem here is a
-RAM-loaded initrd, rebuilt fresh from the flash image on every boot — and
-critically, it's mounted **read-write** at runtime. A boot script runs
+RAM-loaded initrd, rebuilt fresh from the flash image on every boot, and 
+it's mounted **read-write** at runtime. A boot script runs
 early in the init sequence, before the console shell ever spawns and
 sources `/etc/profile`. That script is itself obfuscated on flash, using
 an encryption scheme that turned out to lean on a single key baked
-directly into a kernel module, recoverable by anyone willing to
-disassemble it. Once that key's in hand, the boot script can be decrypted,
+directly into a kernel module, recoverable by disassemblying it.
+Using that key, the boot script can be decrypted,
 edited, and re-encrypted well enough to pass the device's own check on the
 way in.
 
@@ -123,7 +118,7 @@ The obvious first target, because it's the obvious first target for any
 embedded Linux device with a framebuffer. The port used is
 [doomgeneric](https://github.com/ozkl/doomgeneric)'s `linuxvt` backend —
 pure framebuffer plus evdev, no X11, no SDL — cross-compiled statically
-for ARM EABI5 with a Docker toolchain, since this device runs uClibc and
+for ARM EABI5, since this device runs uClibc and
 almost nothing built for a normal glibc host will run on it unmodified.
 
 Getting a static binary onto the device turned out to be the easy part.
@@ -131,7 +126,7 @@ Getting a *picture* out of it was where the actual work was.
 
 ### Finding — and actually writing to — the framebuffer
 
-The device exposes `/dev/fb0` like any other Linux framebuffer console,
+The device exposes `/dev/fb0` for the Linux framebuffer console,
 and the first working build wrote to it exactly the way every framebuffer
 tutorial says to: `mmap()` the device, `memcpy()` pixel data into it, done.
 Every diagnostic said this was working — the process stayed alive at a

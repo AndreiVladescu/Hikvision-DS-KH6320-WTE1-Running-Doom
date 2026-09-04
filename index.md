@@ -11,7 +11,7 @@
 
 ## It runs DOOM. It also runs Minecraft.
 
-<img src="./img/doom-hero-gameplay.jpeg" width="100%" alt="DOOM running on the DS-KH6320-WTE1 indoor station's touchscreen">
+<img src="./img/doom.jpeg" width="100%" alt="DOOM running on the DS-KH6320-WTE1 indoor station's touchscreen, full device in frame">
 
 The **Hikvision DS-KH6320-WTE1** is a wall-mounted video intercom "indoor
 station" — the panel inside the front door that shows you who's outside,
@@ -195,6 +195,11 @@ rather than existing as a physical control. Confirmed working end-to-end,
 not just at the event-detection level: dropped directly into a level with
 `-warp 1 1`, tapping FORWARD visibly walks the player, and FIRE discharges
 a weapon.
+
+<img src="./img/doom-hero-gameplay.jpeg" width="100%" alt="DOOM gameplay running on the panel after being moved by touch controls, tearing artifact visible near the top of the frame">
+
+*Touch-controlled gameplay in E1M1 — the green band near the top is the
+tearing artifact covered next, not a touch-control issue.*
 
 ### The known bug: colours are off, and the picture is shifted
 

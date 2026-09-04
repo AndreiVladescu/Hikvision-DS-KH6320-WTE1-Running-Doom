@@ -35,7 +35,6 @@ root access gets you" side of the project, not the vulnerability research.
   <div class="stat"><span class="num">1024×600</span><span class="lbl">Touch panel, single-touch</span></div>
   <div class="stat"><span class="num">32 MB</span><span class="lbl">SPI NOR flash, chip-off read</span></div>
   <div class="stat"><span class="num">8 GB</span><span class="lbl">microSD for persistent storage</span></div>
-  <div class="stat"><span class="num">2</span><span class="lbl">Unsupported OSes now running</span></div>
 </div>
 
 ---

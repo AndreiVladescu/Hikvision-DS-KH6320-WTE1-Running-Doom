@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#eceff1"/>
+  <rect x="12" y="12" width="776" height="576" fill="none" stroke="#9aa7b0" stroke-width="3" stroke-dasharray="10 8" rx="14"/>
+  <g transform="translate(400.0,228.0)" stroke="#78878f" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round">
+    <rect x="-46" y="-30" width="92" height="66" rx="8"/>
+    <path d="M -18 -30 L -10 -44 L 10 -44 L 18 -30"/>
+    <circle cx="0" cy="4" r="20"/>
+    <circle cx="0" cy="4" r="9" fill="#78878f"/>
+  </g>
+  <text x="400.0" y="372.0" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#3a4750" text-anchor="middle">8 GB SD card in the slot</text>
+  <text x="400.0" y="400.0" font-family="Helvetica, Arial, sans-serif" font-size="17" fill="#78878f" text-anchor="middle">the card providing persistent storage for both ports</text>
+  <text x="400.0" y="578" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#a4aeb5" text-anchor="middle" letter-spacing="2">PLACEHOLDER — PHOTO TO BE ADDED</text>
+</svg>

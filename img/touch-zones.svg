@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="560" viewBox="0 0 900 560">
+  <rect width="900" height="560" fill="#111418" rx="18"/>
+
+  <!-- panel outline: 1024x600 native, drawn to scale -->
+  <g transform="translate(60,40)">
+    <rect x="0" y="0" width="780" height="457" rx="10" fill="#1b1f26" stroke="#3a4750" stroke-width="3"/>
+
+    <!-- rendered game area, 960x600 scaled from 1024x600, ~32px margins each side -->
+    <rect x="24" y="0" width="732" height="457" fill="#050505"/>
+
+    <!-- 3x2 touch zone grid -->
+    <g font-family="Helvetica, Arial, sans-serif" font-weight="700" fill="#e8e8e8" text-anchor="middle">
+      <rect x="24" y="0" width="244" height="228" fill="none" stroke="#4c9ffe" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="146" y="120" font-size="22">USE</text>
+
+      <rect x="268" y="0" width="244" height="228" fill="none" stroke="#4c9ffe" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="390" y="120" font-size="22">FORWARD</text>
+
+      <rect x="512" y="0" width="244" height="228" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="634" y="120" font-size="22">FIRE</text>
+
+      <rect x="24" y="228" width="244" height="229" fill="none" stroke="#4c9ffe" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="146" y="349" font-size="20">TURN LEFT</text>
+
+      <rect x="268" y="228" width="244" height="229" fill="none" stroke="#4c9ffe" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="390" y="349" font-size="22">BACK</text>
+
+      <rect x="512" y="228" width="244" height="229" fill="none" stroke="#4c9ffe" stroke-width="2" stroke-dasharray="6 5"/>
+      <text x="634" y="349" font-size="20">TURN RIGHT</text>
+    </g>
+
+    <!-- margin callouts -->
+    <line x1="0" y1="490" x2="24" y2="490" stroke="#78878f" stroke-width="2"/>
+    <line x1="756" y1="490" x2="780" y2="490" stroke="#78878f" stroke-width="2"/>
+    <text x="12" y="512" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#78878f" text-anchor="middle">~32px</text>
+    <text x="768" y="512" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#78878f" text-anchor="middle">~32px</text>
+  </g>
+
+  <text x="450" y="525" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#a4aeb5" text-anchor="middle">
+    Six fixed touch zones over the rendered frame — single-touch panel, so only one action is held at a time
+  </text>
+  <text x="450" y="546" font-family="Helvetica, Arial, sans-serif" font-size="13" fill="#5b6770" text-anchor="middle">
+    920×600 physical touch panel, 0–1024 × 0–600 native range (EVIOCGABS) — no calibration scaling needed
+  </text>
+</svg>

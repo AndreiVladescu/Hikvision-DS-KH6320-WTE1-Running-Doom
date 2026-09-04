@@ -1,0 +1,9 @@
+title: Running DOOM (and Minecraft) on a Hikvision Intercom
+remote_theme: pages-themes/slate@v0.2.0
+description: Chip-off root access on a Hikvision DS-KH6320-WTE1 indoor station, then porting DOOM and a Minecraft server to its touchscreen.
+
+exclude:
+  - "*.bin"
+  - "*.BIN"
+  - TEMPLATE.md
+  - TASKS.md

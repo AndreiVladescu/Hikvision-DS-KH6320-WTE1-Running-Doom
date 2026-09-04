@@ -1,0 +1,138 @@
+/* ── Gallery ──────────────────────────────────────────────────────────── */
+.shot-swiper{
+  max-width: 980px;
+  margin: 1rem auto 0.75rem;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 12px 40px rgba(0,0,0,.10);
+  background: rgba(0,0,0,.02);
+}
+.shot-swiper .swiper-slide{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: rgba(0,0,0,.02);
+}
+.shot-swiper .swiper-zoom-container{
+  width:100%;
+  height: min(64vh, 620px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.shot-swiper img{
+  width:100%;
+  height:100%;
+  object-fit: contain;
+  display:block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.shot-gallery-controls{
+  max-width: 980px;
+  margin: 0 auto 2rem;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 12px;
+}
+.shot-gallery-controls button{
+  border:0;
+  cursor:pointer;
+  padding:10px 14px;
+  border-radius:12px;
+  background: rgba(0,0,0,.06);
+  box-shadow: 0 1px 4px rgba(0,0,0,.12);
+  font-size: 1rem;
+}
+.shot-gallery-controls button:focus{
+  outline:2px solid #4c9ffe;
+  outline-offset:2px;
+}
+#shot-caption{
+  flex: 1;
+  text-align:center;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(0,0,0,.03);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  font-size: 0.95rem;
+  overflow:hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── Callouts ─────────────────────────────────────────────────────────── */
+.note{
+  border-left: 5px solid #4c9ffe;
+  background: #16202c;
+  color: #ecf0f1;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.note strong{ color: #7ab8ff; }
+
+.bug{
+  border-left: 5px solid #e6a23c;
+  background: #241d12;
+  color: #ecf0f1;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.bug strong{ color: #f0b84f; }
+
+.win{
+  border-left: 5px solid #27ae60;
+  background: #142018;
+  color: #ecf0f1;
+  padding: 16px 20px;
+  border-radius: 0 8px 8px 0;
+  margin: 1.5rem 0;
+  font-size: 1.02rem;
+  line-height: 1.6;
+}
+.win strong{ color: #4fd486; }
+
+/* ── Stats strip ──────────────────────────────────────────────────────── */
+.stats{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 1.2rem 0;
+}
+.stat{
+  flex: 1 1 130px;
+  text-align: center;
+  padding: 14px 10px;
+  border-radius: 10px;
+  background: rgba(0,0,0,.04);
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+}
+.stat .num{
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #4c9ffe;
+  line-height: 1.25;
+}
+.stat .lbl{
+  font-size: 0.76rem;
+  color: #666;
+  letter-spacing: 0.04em;
+}
+
+/* ── Dark mode ────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark){
+  .shot-swiper{ background: rgba(255,255,255,.06); }
+  .shot-swiper .swiper-slide{ background: rgba(255,255,255,.06); }
+  .shot-gallery-controls button{ background: rgba(255,255,255,.10); color: inherit; }
+  #shot-caption{ background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
+  .stat{ background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.10); }
+  .stat .lbl{ color: #aaa; }
+}

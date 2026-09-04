@@ -5,6 +5,9 @@
 
 <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js" defer></script>
 <script src="./js/gallery.js" defer></script>
+<script src="./js/theme.js" defer></script>
+
+<button id="theme-toggle" type="button" aria-label="Switch to light theme" title="Switch to light theme">🌙</button>
 
 ## It runs DOOM. It also runs Minecraft.
 

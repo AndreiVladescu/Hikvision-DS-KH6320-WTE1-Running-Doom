@@ -1,17 +1,138 @@
+/* ── Theme system ─────────────────────────────────────────────────────────
+   Dark by default (no attribute needed — it's the plain fallback below),
+   flipped to light by JS setting <html data-theme="light">. See
+   _includes/head-custom.html (no-flash early read) and js/theme.js
+   (the toggle button's click handler).
+
+   The base theme (pages-themes/slate) already ships a dark header and
+   footer — #header_wrap and #footer_wrap are dark-on-dark out of the box.
+   Only its #main_content_wrap (the actual reading area) is a light
+   #f2f2f2 box; that's what these overrides flip. Selectors below target
+   the theme's real markup/classes directly (#main_content_wrap, .inner,
+   h1–h6, a, pre, code, blockquote, table/th/td, img, hr) — read from
+   https://github.com/pages-themes/slate rather than guessed.
+   ────────────────────────────────────────────────────────────────────── */
+:root{
+  --bg-content: #161a20;
+  --text-main: #dbe1e8;
+  --text-muted: #98a2ad;
+  --heading: #f2f4f7;
+  --link: #6ab0f3;
+  --code-bg: #1d232b;
+  --code-text: #e4e8ee;
+  --border: #2b323c;
+  --table-header-bg: #232a34;
+  --card-bg: rgba(255,255,255,.06);
+  --card-bg-strong: rgba(255,255,255,.10);
+  --card-border: rgba(255,255,255,.12);
+}
+
+html[data-theme="light"]{
+  --bg-content: #f2f2f2;
+  --text-main: #373737;
+  --text-muted: #666666;
+  --heading: #222222;
+  --link: #0F79D0;
+  --code-bg: #ffffff;
+  --code-text: #222222;
+  --border: #ebebeb;
+  --table-header-bg: #373737;
+  --card-bg: rgba(0,0,0,.04);
+  --card-bg-strong: rgba(0,0,0,.06);
+  --card-border: rgba(0,0,0,.08);
+}
+
+/* The reading area itself. Header/footer are left alone — already dark. */
+#main_content_wrap{ background: var(--bg-content) !important; }
+#main_content{ color: var(--text-main); }
+
+#main_content h1, #main_content h2, #main_content h3,
+#main_content h4, #main_content h5, #main_content h6{
+  color: var(--heading) !important;
+}
+/* h2/hr both paint a light dotted-rule background image in the base
+   theme — replaced with a flat border so it doesn't fight the new bg. */
+#main_content h2{ background: none !important; border-bottom: 1px solid var(--border); }
+#main_content hr{ background: none !important; height: 1px; border: none; border-top: 1px solid var(--border); }
+
+#main_content a{ color: var(--link) !important; }
+
+#main_content pre, #main_content code{
+  background-color: var(--code-bg) !important;
+  color: var(--code-text) !important;
+}
+
+#main_content blockquote{
+  color: var(--text-muted) !important;
+  border-left-color: var(--border) !important;
+}
+
+#main_content table{ border-color: var(--border) !important; }
+#main_content th{ background: var(--table-header-bg) !important; }
+#main_content td{ border-color: var(--border) !important; color: var(--text-main); }
+
+#main_content img{
+  max-width: 100% !important;
+  border-color: var(--border) !important;
+  box-shadow: 0 0 5px var(--border) !important;
+}
+
+/* ── Reading width ────────────────────────────────────────────────────────
+   The base theme hardcodes `.inner { max-width: 640px }` for the header,
+   content AND footer alike — on any reasonably wide monitor that reads as
+   roughly a third of the screen. Widened to half the viewport, with a
+   sane floor/ceiling so it doesn't go unreadably narrow OR absurdly wide,
+   and a mobile breakpoint that gives up the vw-based width entirely.
+   ────────────────────────────────────────────────────────────────────── */
+.inner{
+  max-width: 50vw !important;
+  min-width: 320px;
+}
+@media screen and (min-width: 2400px){
+  .inner{ max-width: 1200px !important; }
+}
+@media screen and (max-width: 900px){
+  .inner{ max-width: 92vw !important; }
+}
+
+/* ── Theme toggle button ──────────────────────────────────────────────── */
+#theme-toggle{
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 1000;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--card-border);
+  background: var(--code-bg);
+  color: var(--text-main);
+  font-size: 1.25rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+#theme-toggle:hover{ transform: scale(1.08); }
+#theme-toggle:focus{ outline: 2px solid var(--link); outline-offset: 2px; }
+
 /* ── Gallery ──────────────────────────────────────────────────────────── */
 .shot-swiper{
   max-width: 980px;
   margin: 1rem auto 0.75rem;
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 12px 40px rgba(0,0,0,.10);
-  background: rgba(0,0,0,.02);
+  box-shadow: 0 12px 40px rgba(0,0,0,.30);
+  background: var(--card-bg);
 }
 .shot-swiper .swiper-slide{
   display:flex;
   align-items:center;
   justify-content:center;
-  background: rgba(0,0,0,.02);
+  background: var(--card-bg);
 }
 .shot-swiper .swiper-zoom-container{
   width:100%;
@@ -41,12 +162,13 @@
   cursor:pointer;
   padding:10px 14px;
   border-radius:12px;
-  background: rgba(0,0,0,.06);
-  box-shadow: 0 1px 4px rgba(0,0,0,.12);
+  background: var(--card-bg-strong);
+  color: var(--text-main);
+  box-shadow: 0 1px 4px rgba(0,0,0,.20);
   font-size: 1rem;
 }
 .shot-gallery-controls button:focus{
-  outline:2px solid #4c9ffe;
+  outline:2px solid var(--link);
   outline-offset:2px;
 }
 #shot-caption{
@@ -54,8 +176,9 @@
   text-align:center;
   padding: 10px 12px;
   border-radius: 12px;
-  background: rgba(0,0,0,.03);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  background: var(--card-bg);
+  color: var(--text-main);
+  box-shadow: inset 0 0 0 1px var(--card-border);
   font-size: 0.95rem;
   overflow:hidden;
   text-overflow: ellipsis;
@@ -111,28 +234,18 @@
   text-align: center;
   padding: 14px 10px;
   border-radius: 10px;
-  background: rgba(0,0,0,.04);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  background: var(--card-bg);
+  box-shadow: inset 0 0 0 1px var(--card-border);
 }
 .stat .num{
   display: block;
   font-size: 1.35rem;
   font-weight: 700;
-  color: #4c9ffe;
+  color: var(--link);
   line-height: 1.25;
 }
 .stat .lbl{
   font-size: 0.76rem;
-  color: #666;
+  color: var(--text-muted);
   letter-spacing: 0.04em;
-}
-
-/* ── Dark mode ────────────────────────────────────────────────────────── */
-@media (prefers-color-scheme: dark){
-  .shot-swiper{ background: rgba(255,255,255,.06); }
-  .shot-swiper .swiper-slide{ background: rgba(255,255,255,.06); }
-  .shot-gallery-controls button{ background: rgba(255,255,255,.10); color: inherit; }
-  #shot-caption{ background: rgba(255,255,255,.08); box-shadow: inset 0 0 0 1px rgba(255,255,255,.12); }
-  .stat{ background: rgba(255,255,255,.06); box-shadow: inset 0 0 0 1px rgba(255,255,255,.10); }
-  .stat .lbl{ color: #aaa; }
 }

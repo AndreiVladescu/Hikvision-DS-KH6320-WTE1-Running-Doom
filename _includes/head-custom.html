@@ -1,0 +1,12 @@
+<script>
+  // Runs synchronously in <head>, before first paint, so a returning
+  // visitor who picked light mode never sees a flash of the dark default.
+  // Dark itself needs no JS at all — it's the plain CSS default.
+  (function () {
+    try {
+      if (localStorage.getItem('theme') === 'light') {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    } catch (e) {}
+  })();
+</script>
